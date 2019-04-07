@@ -1,4 +1,3 @@
-// Lazy Load Web Component class
 customElements.define('lazy-img', class extends HTMLElement {
     constructor() {
 
