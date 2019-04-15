@@ -1,20 +1,17 @@
 class LazyImg extends HTMLElement {
 
-    lazyImg;
     lazyAtts;
     lazyShadow;
-    lazyStyles;
     lazyImgLoaded;
 
     constructor() {
         super();
         this.lazyImgLoaded = false;
         this.lazyShadow = this.attachShadow({mode: 'open'});
-        this.lazyStyles = this.buildStyles();
-        this.lazyShadow.appendChild(this.lazyStyles);
+        this.lazyShadow.appendChild(this.buildStyles());
         this.lazyAtts = this.parseAttributes(this); // store lazy-img attributes
         if(this.lazyAtts.hasOwnProperty('async') && this.lazyAtts['async'] !== 'false') { // if async attribute exists load image immediately
-            this.loadImage();
+            this.lazyImgLoaded = this.loadImage();
         }
         else {
             let self = this;
@@ -55,9 +52,18 @@ class LazyImg extends HTMLElement {
         return attributes;
     }
 
+    loadImage() {
+        let lazyImg = this.buildImage();
+        if(lazyImg) {
+            this.lazyShadow.appendChild(lazyImg);
+            return true;
+        }
+        return false;
+    }
+
     checkLoadImage() {
         if (!this.lazyImgLoaded && this.isInViewport(this)) { // if lazy-img is in view, load img
-            this.loadImage();
+            this.lazyImgLoaded = this.loadImage();
         }
     }
 
@@ -72,21 +78,12 @@ class LazyImg extends HTMLElement {
         );
     }
 
-    loadImage() {
-        let lazyImg = this.buildImage();
-        if(lazyImg) {
-            this.lazyImg = lazyImg;
-            this.lazyShadow.appendChild(this.lazyImg);
-            this.lazyImgLoaded = true;
-        }
-    }
-
     buildImage() {
         if(this.isValidExtension(this.lazyAtts['src'])) { // check src points to an image
             let self = this;
             const img = document.createElement('img');
-            img.onerror = function(message) {
-                self.logError('The image could not be loaded, please check the value of src is correct'); // if img fails to load, handle error
+            img.onerror = function() {
+                self.logError('lazy-img with src \'' + self.lazyAtts['src'] + '\' could not be loaded'); // if img fails to load, handle error
             };
             for (let property in this.lazyAtts) { // loop through stored lazy-img attributes
                 if (this.lazyAtts.hasOwnProperty(property)) {
@@ -120,12 +117,8 @@ class LazyImg extends HTMLElement {
             if(property === 'async') { // don't add async attribute to img
                 return false;
             }
-            else if(this.lazyAtts[property] === '') { // if attribute value is blank warn in console
-                this.logWarning('Warning, attribute ' + property + ' has a blank value');
-            }
             return true;
         }
-        this.logError('Attribute ' + property + ' is invalid');
         return false;
     }
 
@@ -133,11 +126,8 @@ class LazyImg extends HTMLElement {
         console.error(error);
     }
 
-    logWarning(warning) {
-        console.info(warning);
-    }
-
 }
+
 document.onreadystatechange = function () { // wait for dom to load
     if (document.readyState == "complete") {
         customElements.define('lazy-img', LazyImg);
