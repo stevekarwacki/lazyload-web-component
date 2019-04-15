@@ -1,4 +1,6 @@
-class LazyImg extends HTMLElement {
+import { PolymerElement } from './node_modules/@polymer/polymer/polymer-element.js';
+
+class LazyImg extends PolymerElement {
 
     lazyAtts;
     lazyShadow;
