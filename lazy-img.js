@@ -1,4 +1,4 @@
-import { PolymerElement } from './node_modules/@polymer/polymer/polymer-element.js';
+import { PolymerElement } from "/node_modules/@polymer/polymer/polymer-element.js";
 
 class LazyImg extends PolymerElement {
 
@@ -129,5 +129,11 @@ class LazyImg extends PolymerElement {
     }
 
 }
+
+/* document.onreadystatechange = function () { // wait for dom to load
+    if (document.readyState == "complete") {
+        customElements.define('lazy-img', LazyImg);
+    }
+} */
 
 customElements.define('lazy-img', LazyImg);
