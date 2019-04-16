@@ -1,7 +1,12 @@
 {
   "name": "lazy-img",
   "version": "1.0.0",
+  "description": "A custom HTML element for lazyloading images on scroll or asynchronously",
+  "keywords": ["web component", "custom element", "shadow dom", "lazy load"],
+  "repository": "https://github.com/stevekarwacki/lazyload-web-component.git",
+  "homepage": "https://stevekarwacki.github.io/lazyload-web-component/",
+  "author": "Steve Karwacki <swkarwacki@gmail.com>",
   "dependencies": {
-    "@polymer/polymer": "3.2.0"
+    "@polymer/polymer": "^3.2.0"
   }
 }
