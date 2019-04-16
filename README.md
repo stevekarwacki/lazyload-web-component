@@ -1,24 +1,26 @@
-# <lazy-img> Custom HTML Element
-A custom HTML element for lazyloading images on scroll or asynchronously
+# Lazy-Img Custom Element Web Component
+A custom HTML element built using Web Components and Shadow DOM. The lazy-img custom element loads images based on the users' scroll position
 
-## Include lazy-img.js
+## Get started, include lazy-img.js
 Inlcude lazy-img.js in your html as a script:
 ```
-<script src="lazy-img.js"></script>
+<script type="module" src="./lazy-img.js"></script>
 ```
 
-## lazy-img HTML Tag
-Use the lazy-img tag similar the img tag:
+## Use the lazy-img HTML Element
+Use the lazy-img element like you use the img element:
 ```
-<lazy-img src="http://bit.ly/lazy-kitten" alt="Lazy Kitten"></lazy-img>
+<lazy-img src="https://funlava.com/wp-content/uploads/2013/03/cute-cats-wallpaper.jpg" alt="Lazy Kitten"></lazy-img>
 ```
-All attributes on the lazy-img element will be copied to the img element
+All attributes on the lazy-img element will be copied to the new img element
 
-**Requires valid src attrbiute**
+**Lazy-Img requires valid src attrbiute**
 
 ## Async Property
-Add the async property to make the lazy-img element load asynchronously instead of on scroll:
+Add the async property to make the lazy-img element load it's respective img asynchronously instead of loading on scroll position:
 ```
-<lazy-img src="..." async></lazy-img>
-<lazy-img src="..." async="true"></lazy-img>
+<lazy-img src="https://funlava.com/wp-content/uploads/2013/03/cute-cats-wallpaper.jpg" async></lazy-img>
+<lazy-img src="https://funlava.com/wp-content/uploads/2013/03/cute-cats-wallpaper.jpg" async="true"></lazy-img>
 ```
+## Issues
+The lazy-img custom element can only load images using the http/https protocols. If you are not on a hosted environment, use polymer serve or localhost
