@@ -1,4 +1,4 @@
-import { PolymerElement } from '../node_modules/polymer/polymer-element.js';
+import { PolymerElement } from '/assets/polymer/polymer-element.js';
 
 class LazyImg extends PolymerElement {
 
