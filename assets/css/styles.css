@@ -1,0 +1,13 @@
+.content {
+    position: relative;
+    width: 730px;
+    max-width: 80%;
+    margin: 0 auto;
+    z-index: 100;
+}
+.spacer {
+    height: 110vh;
+}
+.spacer:last-of-type {
+    height: auto;
+}
