@@ -3,81 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title>Lazy Load Custom Web Component</title>
-        <script type="module" src="./lazy-img.js" async defer></script>
-        <style>
-        .counter-container {
-            position: fixed;
-            width: 730px;
-            max-width: 80%;
-            top: 15px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            z-index: 9999;
-        }
-        #load-counter {
-            position: relative;
-            float: right;
-            width: 100px;
-            margin-right: 20px;
-            height: 60px;
-            line-height: 60px;
-            background: rgba(204, 204, 204, 1);
-            border-radius: 4px;
-            font-family: arial;
-            font-weight: 900;
-            text-align: center;
-            cursor: pointer;
-        }
-        #load-counter:hover {
-            border-radius: 4px 0 0 4px;
-            border-right: 0;
-        }
-        #load-counter:after {
-            content: '1 meow = 1 lazy loaded image';
-            position: absolute;
-            background: rgba(196, 196, 196, 1);
-            border-radius: 0 4px 4px 0;
-            box-shadow: inset 4px 0 5px -4px #999999;
-            left: 100%;
-            width: 0;
-            overflow: hidden;
-            height: 60px;
-            line-height: 60px;
-            font-weight: normal;
-            font-size: 12px;
-            top: 0px;
-            transition: width 0.5s ease-in-out;
-        }
-        #load-counter:hover:after {
-            width: 200px;
-        }
-        .content {
-            position: relative;
-            width: 730px;
-            max-width: 80%;
-            margin: 0 auto;
-            z-index: 100;
-        }
-        .spacer {
-            height: 110vh;
-        }
-        .spacer:last-of-type {
-            height: auto;
-        }
-        </style>
-        <script>
-        function addToLoadCount() {
-            let counterElem = document.getElementById('load-counter');
-            let newCount = parseInt(counterElem.getAttribute('data-count')) + 1;
-            let pluralMeowString = (newCount === 1) ? ' meow' : ' meows';
-            counterElem.setAttribute('data-count', newCount);
-            counterElem.innerHTML = newCount + pluralMeowString;
-        }
-        window.addEventListener('lazy-img-loaded', function(event) {
-            addToLoadCount();
-        });
-    </script>
+        <script type="module" src="./components/lazy-img.js" async defer></script>
+        <script src="./assets/js/counter.js"></script>
+        <link href="./assets/css/counter.css" rel="stylesheet" type="text/css" />    
+        <link href="./assets/css/styles.css" rel="stylesheet" type="text/css" />    
     </head>
     <body>
         <div class="counter-container">

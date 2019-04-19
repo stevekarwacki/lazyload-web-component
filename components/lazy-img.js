@@ -1,4 +1,4 @@
-import { PolymerElement } from './polymer/polymer-element.js';
+import { PolymerElement } from '/assets/polymer/polymer-element.js';
 
 class LazyImg extends PolymerElement {
 
@@ -57,9 +57,15 @@ class LazyImg extends PolymerElement {
     loadImage() {
         let lazyImg = this.buildImage();
         if(lazyImg) {
+            let self = this;
             this.lazyImgLoaded = true;
             this.lazyShadow.appendChild(lazyImg);
-            this.dispatchEvent(new CustomEvent('lazy-img-loaded', {bubbles: true, composed: true }));
+            let loadEvent = new CustomEvent('lazy-img-load', { 
+                detail: {
+                    elementData: this
+                }
+            });
+            this.dispatchEvent(loadEvent);
             return true;
         }
         return false;
