@@ -60,15 +60,19 @@ class LazyImg extends PolymerElement {
             let self = this;
             this.lazyImgLoaded = true;
             this.lazyShadow.appendChild(lazyImg);
-            let loadEvent = new CustomEvent('lazy-img-load', { 
-                detail: {
-                    elementData: this
-                }
-            });
-            this.dispatchEvent(loadEvent);
+            this.dispatchLoadEvent();
             return true;
         }
         return false;
+    }
+
+    dispatchLoadEvent() {
+        let loadEvent = new CustomEvent('lazy-img-load', { 
+            detail: {
+                elementRef: this
+            }
+        });
+        this.dispatchEvent(loadEvent);
     }
 
     checkLoadImage() {
