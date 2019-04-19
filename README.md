@@ -1,6 +1,10 @@
 # Lazy-Img Custom Element Web Component
 A custom HTML element built using Web Components and Shadow DOM. The lazy-img custom element loads images based on the users' scroll position
 
+## Working example
+https://stevekarwacki.github.io/lazyload-web-component/
+The page above contains 3 lazy-img elements. Scroll down the page to load the images. I added a counter that fires every time a lazy-img is loaded to make it obvious.
+
 ## Get started, include lazy-img.js
 Inlcude lazy-img.js in your html as a script:
 ```
