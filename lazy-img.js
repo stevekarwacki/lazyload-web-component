@@ -13,7 +13,7 @@ class LazyImg extends PolymerElement {
         this.lazyShadow.appendChild(this.buildStyles());
         this.lazyAtts = this.parseAttributes(this); // store lazy-img attributes
         if(this.lazyAtts.hasOwnProperty('async') && this.lazyAtts['async'] !== 'false') { // if async attribute exists load image immediately
-            this.lazyImgLoaded = this.loadImage();
+            let newImg = this.loadImage();
         }
         else {
             let self = this;
@@ -57,7 +57,9 @@ class LazyImg extends PolymerElement {
     loadImage() {
         let lazyImg = this.buildImage();
         if(lazyImg) {
+            this.lazyImgLoaded = true;
             this.lazyShadow.appendChild(lazyImg);
+            this.dispatchEvent(new CustomEvent('lazy-img-loaded', {bubbles: true, composed: true }));
             return true;
         }
         return false;
@@ -65,10 +67,9 @@ class LazyImg extends PolymerElement {
 
     checkLoadImage() {
         if (!this.lazyImgLoaded && this.isInViewport(this)) { // if lazy-img is in view, load img
-            this.lazyImgLoaded = this.loadImage();
+            let newImg = this.loadImage();
         }
     }
-
 
     isInViewport(elem) { // if elem is within view
         let bounding = elem.getBoundingClientRect();
@@ -129,11 +130,5 @@ class LazyImg extends PolymerElement {
     }
 
 }
-
-/* document.onreadystatechange = function () { // wait for dom to load
-    if (document.readyState == "complete") {
-        customElements.define('lazy-img', LazyImg);
-    }
-} */
 
 customElements.define('lazy-img', LazyImg);
