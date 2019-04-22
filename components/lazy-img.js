@@ -1,6 +1,4 @@
-import { PolymerElement } from '../assets/polymer/polymer-element.js';
-
-class LazyImg extends PolymerElement {
+class LazyImg extends HTMLElement {
 
     lazyAtts;
     lazyShadow;
@@ -10,8 +8,8 @@ class LazyImg extends PolymerElement {
         super();
         this.lazyImgLoaded = false;
         this.lazyShadow = this.attachShadow({mode: 'open'});
-        this.lazyShadow.appendChild(this.buildStyles());
         this.lazyAtts = this.parseAttributes(this); // store lazy-img attributes
+        this.lazyShadow.appendChild(this.buildStyles());
         if(this.lazyAtts.hasOwnProperty('async') && this.lazyAtts['async'] !== 'false') { // if async attribute exists load image immediately
             let newImg = this.loadImage();
         }
@@ -26,12 +24,14 @@ class LazyImg extends PolymerElement {
 
     buildStyles() { // build shadow dom styles
         const style = document.createElement('style');
+        let styles = '';
+        // force lazy-img to respect width and height attributes
+        styles = (this.lazyAtts.hasOwnProperty('width')) ? styles + 'width: ' + this.lazyAtts.width + 'px;' : styles;
+        styles = (this.lazyAtts.hasOwnProperty('height')) ? styles + 'height: ' + this.lazyAtts.height + 'px;' : styles;
         style.textContent = `
 :host {
-    min-height: 1px;
-    min-width: 1px;
+    ${styles}
     display: inline-block;
-    overflow: hidden;
 }
 :host img {
     display: block;
@@ -61,15 +61,15 @@ class LazyImg extends PolymerElement {
             this.lazyImgLoaded = true;
             this.lazyShadow.appendChild(lazyImg);
             this.dispatchLoadEvent();
-            return true;
+            return lazyImg;
         }
         return false;
     }
 
-    dispatchLoadEvent() {
+    dispatchLoadEvent() { // dispatch custom event when lazy-img loads successfully
         let loadEvent = new CustomEvent('lazy-img-load', { 
             detail: {
-                elementRef: this
+                elementRef: this // send reference to this lazy-img element
             }
         });
         this.dispatchEvent(loadEvent);
@@ -81,13 +81,11 @@ class LazyImg extends PolymerElement {
         }
     }
 
-    isInViewport(elem) { // if elem is within view
+    isInViewport(elem) { // if elem is partially within view
         let bounding = elem.getBoundingClientRect();
+        let windowHeight = (window.innerHeight || document.documentElement.clientHeight);
         return (
-            bounding.top >= 0 &&
-            bounding.left >= 0 &&
-            bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+            (bounding.top <= windowHeight) && ((bounding.top + bounding.height) >= 0)
         );
     }
 

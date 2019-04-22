@@ -1,7 +1,7 @@
 .counter-container {
     position: fixed;
     width: 730px;
-    max-width: 80%;
+    max-width: 95%;
     top: 15px;
     left: 0;
     right: 0;
@@ -9,13 +9,13 @@
     z-index: 9999;
 }
 #load-counter {
+    display: none;
     position: relative;
-    float: right;
     width: 100px;
-    margin-right: 20px;
+    margin-left: 5px;
     height: 60px;
     line-height: 60px;
-    background: rgba(204, 204, 204, 1);
+    background: rgba(204, 204, 204, 0.9);
     border-radius: 4px;
     font-family: arial;
     font-weight: 900;
@@ -29,7 +29,7 @@
 #load-counter:after {
     content: '1 meow = 1 lazy loaded image';
     position: absolute;
-    background: rgba(196, 196, 196, 1);
+    background: rgba(196, 196, 196, 0.9);
     border-radius: 0 4px 4px 0;
     box-shadow: inset 4px 0 5px -4px #999999;
     left: 100%;
@@ -40,7 +40,7 @@
     font-weight: normal;
     font-size: 12px;
     top: 0px;
-    transition: width 0.5s ease-in-out;
+    transition: width 0.3s ease-in-out;
 }
 #load-counter:hover:after {
     width: 200px;
