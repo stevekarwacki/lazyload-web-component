@@ -12,11 +12,16 @@ Inlcude lazy-img.js in your html as a script:
 ```
 
 ## Use the lazy-img HTML Element
-Use the lazy-img element like you use the img element:
+The lazy-img element is used similar to the img element with the exception on the closing tag:
 ```
 <lazy-img src="https://funlava.com/wp-content/uploads/2013/03/cute-cats-wallpaper.jpg" alt="Lazy Kitten"></lazy-img>
 ```
-All attributes on the lazy-img element will be copied to the new img element
+All attributes on the lazy-img element will be copied to the new img element. 
+
+Add width and height attributes to the lazy-img element to maintain it's position in the page layout:
+```
+<lazy-img src="https://funlava.com/wp-content/uploads/2013/03/cute-cats-wallpaper.jpg" width="605" height="378"></lazy-img>
+```
 
 **Lazy-Img requires valid src attrbiute**
 
@@ -31,4 +36,4 @@ Add the async property to make the lazy-img element load it's respective img asy
 When a lazy-img element successfully generates an img, it dispatches a custom event called lazy-img-load. The event object that is passed to the event handler contains a property (elementRef) that is a reference to the loaded lazy-img element. This property may be accessed in an event handler like this: event.detail.elementRef
 
 ## Issues
-The lazy-img custom element can only load images using the http/https protocols
+Must be loaded over http/localhost - 
