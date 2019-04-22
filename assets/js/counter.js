@@ -4,6 +4,7 @@ function addToLoadCount(event) {
     let pluralMeowString = (newCount === 1) ? ' meow' : ' meows';
     counterElem.setAttribute('data-count', newCount);
     counterElem.innerHTML = newCount + pluralMeowString;
+    counterElem.style.display = 'block';
 }
 
-window.addEventListener('lazy-img-load', addToLoadCount, true);
+window.addEventListener('lazy-img-load', addToLoadCount, true); // listen for lazy-img-load custom event
