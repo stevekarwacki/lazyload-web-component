@@ -1,8 +1,8 @@
 .content {
     position: relative;
     width: 730px;
-    max-width: 80%;
-    margin: 0 auto;
+    max-width: 95%;
+    margin: 100px auto 0;
     z-index: 100;
 }
 .spacer {
