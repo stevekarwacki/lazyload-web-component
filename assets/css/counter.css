@@ -1,19 +1,15 @@
 .counter-container {
     position: fixed;
-    width: 730px;
-    max-width: 95%;
+    width: 100%;
     top: 15px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
     z-index: 9999;
 }
 #load-counter {
     display: none;
     position: relative;
     width: 100px;
-    margin-left: 5px;
     height: 60px;
+    margin-left: 2.5%;
     line-height: 60px;
     background: rgba(204, 204, 204, 0.9);
     border-radius: 4px;
@@ -44,4 +40,10 @@
 }
 #load-counter:hover:after {
     width: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+    #load-counter {
+        margin-left: calc((100% / 2) - (730px / 2));
+    }
 }
